@@ -18,10 +18,6 @@ body {
     overflow: hidden;
   }
 
-  .ant-btn-primary {
-    background-color: #1677ff;
-  }
-
   .categories::-webkit-scrollbar {
     display: none;
   }
