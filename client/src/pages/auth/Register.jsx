@@ -10,7 +10,6 @@ const Register = () => {
                     <h1 className="text-center text-5xl font-bold mb-2">LOGO</h1>
                     <Form layout="vertical">
                         <Form.Item
-
                             label="Kullanıcı Adı"
                             name="username"
                             rules={[
@@ -23,7 +22,6 @@ const Register = () => {
                         </Form.Item>
 
                         <Form.Item
-
                             label="Email"
                             name="email"
                             rules={[
@@ -36,7 +34,6 @@ const Register = () => {
                         </Form.Item>
 
                         <Form.Item
-
                             label="Parola"
                             name="password"
                             rules={[
@@ -49,14 +46,22 @@ const Register = () => {
                         </Form.Item>
 
                         <Form.Item
-
                             label="Parola Onayla"
                             name="passwordConfirm"
+                            dependencies={["password"]}
                             rules={[
                                 {
                                     required: true,
                                     message: "Parola Onayla Alanı Boş Geçilemez!"
-                                }
+                                },
+                                ({getFieldValue}) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(new Error('Girdiğiniz parolalar eşleşmiyor!'));
+                                    },
+                                }),
                             ]}>
                             <Input.Password/>
                         </Form.Item>
