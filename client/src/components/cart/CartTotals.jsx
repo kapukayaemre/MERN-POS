@@ -1,7 +1,7 @@
-import {Button} from "antd";
+import {Button, message} from "antd";
 import {ClearOutlined, PlusCircleOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import {useSelector, useDispatch} from "react-redux";
-import {decrease, deleteCart, increase} from "../../redux/cartSlice";
+import {decrease, deleteCart, increase, reset} from "../../redux/cartSlice";
 
 const CartTotals = () => {
     const cart = useSelector((state) => state.cart);
@@ -19,7 +19,10 @@ const CartTotals = () => {
                                 src={item.img}
                                 alt=""
                                 className="w-16 h-16 object-cover cursor-pointer"
-                                onClick={() => dispatch(deleteCart(item))}
+                                onClick={() => {
+                                    dispatch(deleteCart(item))
+                                    message.success(`${item.title} Sepetten Silindi!`)
+                                }}
                             />
                             <div className="flex flex-col ml-2">
                                 <b>{item.title}</b>
@@ -44,6 +47,7 @@ const CartTotals = () => {
                                     if (item.quantity === 1) {
                                         if (window.confirm("Ürün Silinsin mi?")) {
                                             dispatch(decrease(item));
+                                            message.success(`${item.title} Sepetten Silindi!`);
                                         }
                                     }
 
@@ -77,8 +81,31 @@ const CartTotals = () => {
                 </div>
 
                 <div className="py-4 px-2">
-                    <Button type="primary" className="w-full" size="large">Sipariş Oluştur</Button>
-                    <Button type="primary" className="w-full mt-2 flex items-center justify-center" size="large" icon={<ClearOutlined />} danger>Temizle</Button>
+                    <Button
+                        type="primary"
+                        className="w-full"
+                        size="large"
+                        disabled={cart.cartItems.length === 0}
+                    >
+                        Sipariş Oluştur
+                    </Button>
+
+                    <Button
+                        type="primary"
+                        className="w-full mt-2 flex items-center justify-center"
+                        size="large"
+                        icon={<ClearOutlined />}
+                        danger
+                        disabled={cart.cartItems.length === 0}
+                        onClick={() => {
+                            if (window.confirm("Sepeti Temizlemek İstediğinize Emin misiniz?")) {
+                                dispatch(reset());
+                                message.success("Sepet Başarıyla Temizlendi!");
+                            }
+                        }}
+                    >
+                        Temizle
+                    </Button>
                 </div>
             </div>
         </div>

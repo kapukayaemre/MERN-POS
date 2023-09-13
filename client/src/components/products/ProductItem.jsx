@@ -1,5 +1,6 @@
 import {addProduct} from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
+import {message} from "antd";
 
 
 const ProductItem = ({item}) => {
@@ -8,6 +9,7 @@ const ProductItem = ({item}) => {
 
     const handleClick = () => {
         dispatch(addProduct({...item, quantity: 1}));
+        message.success(`${item.title} Sepete Eklendi`);
     }
 
     return (
