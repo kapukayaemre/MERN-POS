@@ -2,10 +2,13 @@ import {Button, message} from "antd";
 import {ClearOutlined, PlusCircleOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import {useSelector, useDispatch} from "react-redux";
 import {decrease, deleteCart, increase, reset} from "../../redux/cartSlice";
+import {useNavigate} from "react-router-dom";
 
 const CartTotals = () => {
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     return (
         <div className="cart h-full max-h-[calc(100vh_-_90px)] flex flex-col">
             <h2 className="bg-blue-600 text-center py-4 text-white font-bold tracking-wide">
@@ -69,14 +72,18 @@ const CartTotals = () => {
                     </div>
                     <div className="flex justify-between p-2">
                         <b>KDV %{cart.tax}</b>
-                        <span className="text-red-700">{((cart.total * cart.tax) / 100) > 0 ? `+${((cart.total * cart.tax) / 100).toFixed(2)}` : 0}₺</span>
+                        <span className="text-red-700">
+                            {((cart.total * cart.tax) / 100) > 0 ? `+${((cart.total * cart.tax) / 100).toFixed(2)}` : 0}₺
+                        </span>
                     </div>
                 </div>
 
                 <div className="border-b mt-4">
                     <div className="flex justify-between p-2">
                         <b className="text-xl text-green-500">Genel Toplam</b>
-                        <span className="text-xl">{cart.total + (cart.total * cart.tax) / 100 > 0 ? (cart.total + (cart.total * cart.tax) / 100).toFixed(2) : 0}₺</span>
+                        <span className="text-xl">
+                            {cart.total + (cart.total * cart.tax) / 100 > 0 ? (cart.total + (cart.total * cart.tax) / 100).toFixed(2) : 0}₺
+                        </span>
                     </div>
                 </div>
 
@@ -86,6 +93,7 @@ const CartTotals = () => {
                         className="w-full"
                         size="large"
                         disabled={cart.cartItems.length === 0}
+                        onClick={() => navigate("/cart")}
                     >
                         Sipariş Oluştur
                     </Button>
