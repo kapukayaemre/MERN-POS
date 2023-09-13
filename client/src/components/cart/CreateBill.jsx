@@ -46,7 +46,7 @@ const CreateBill = ({isModalOpen, setIsModalOpen}) => {
                     <Input placeholder="Bir Müşteri Adı Giriniz..."/>
                 </Form.Item>
 
-                <Form.Item label="Telefon No" name="phoneNumber" rules={[{required: true, message:"Telefon No Alanı Boş Geçilemez!"}]}>
+                <Form.Item label="Telefon No" name="customerPhoneNumber" rules={[{required: true, message:"Telefon No Alanı Boş Geçilemez!"}]}>
                     <Input placeholder="Telefon Giriniz..." maxLength={11}/>
                 </Form.Item>
 
