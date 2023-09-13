@@ -1,7 +1,7 @@
 import {Button} from "antd";
 import {ClearOutlined, PlusCircleOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import {useSelector, useDispatch} from "react-redux";
-import {deleteCart} from "../../redux/cartSlice";
+import {decrease, deleteCart, increase} from "../../redux/cartSlice";
 
 const CartTotals = () => {
     const cart = useSelector((state) => state.cart);
@@ -12,7 +12,7 @@ const CartTotals = () => {
                 Sepetteki Ürünler
             </h2>
             <ul className="cart-items px-2 flex flex-col gap-y-3 py-2 overflow-y-auto">
-                { cart.cartItems.map((item) => (
+                { cart.cartItems.length > 0 ? cart.cartItems.map((item) => (
                     <li className="cart-item flex justify-between" id={item._id}>
                         <div className="flex items-center">
                             <img
@@ -26,23 +26,35 @@ const CartTotals = () => {
                                 <span>{item.price}₺ x {item.quantity}</span>
                             </div>
                         </div>
-                        <div className="flex items-center gap-x-1">
+                        <div className="flex items-center">
                             <Button
                                 type="primary"
                                 className="w-full flex items-center justify-center !rounded-full"
                                 size="small"
                                 icon={<PlusCircleOutlined />}
+                                onClick={() => dispatch(increase(item))}
                             />
-                            <span className="font-bold">{item.quantity}</span>
+                            <span className="font-bold w-6 inline-block text-center">{item.quantity}</span>
                             <Button
                                 type="primary"
                                 className="w-full flex items-center justify-center !rounded-full"
                                 size="small"
                                 icon={<MinusCircleOutlined />}
+                                onClick={() => {
+                                    if (item.quantity === 1) {
+                                        if (window.confirm("Ürün Silinsin mi?")) {
+                                            dispatch(decrease(item));
+                                        }
+                                    }
+
+                                    if (item.quantity > 1) {
+                                        dispatch(decrease(item));
+                                    }
+                                }}
                             />
                         </div>
                     </li>
-                )) }
+                )) : "Sepette Hiç Ürün Bulunmamaktadır!" }
             </ul>
 
             <div className="cart-totals mt-auto">
