@@ -13,7 +13,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import "./index.css";
 
-const Header = () => {
+const Header = ({setSearch}) => {
     const cart = useSelector((state) => state.cart);
     const navigate = useNavigate();
 
@@ -39,6 +39,7 @@ const Header = () => {
                         placeholder="Ürün Ara..."
                         prefix={<SearchOutlined/>}
                         className="rounded-full max-w-[800px]"
+                        onChange={(e) => setSearch(e.target.value.toLowerCase())}
                     />
                 </div>
                 <div className="menu-links">
