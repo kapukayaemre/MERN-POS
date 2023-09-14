@@ -206,10 +206,17 @@ const BillPage = () => {
             <Header/>
             <div className="px-6">
                 <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
-                <Table dataSource={billItems} columns={columns} bordered pagination={false} scroll={{
+                <Table
+                    dataSource={billItems}
+                    columns={columns}
+                    bordered
+                    pagination={false}
+                    scroll={{
                     x: 1000,
                     y: 300
-                }} />
+                }}
+                    rowKey="_id"
+                />
             </div>
             <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer}/>
         </>

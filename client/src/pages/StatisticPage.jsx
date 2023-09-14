@@ -6,6 +6,7 @@ import {Area, Pie} from "@ant-design/charts";
 const StatisticPage = () => {
     const [data, setData] = useState([]);
     const [products, setProducts] = useState([]);
+    const user = JSON.parse(localStorage.getItem("posUser"));
 
     useEffect(() => {
         const getProducts = async () => {
@@ -92,7 +93,7 @@ const StatisticPage = () => {
                 <h1 className="text-4xl font-bold text-center mb-4">İstatistiklerim</h1>
                 <div className="statistic-section">
                     <h2 className="text-lg">
-                        Hoş geldin <span className="text-green-700 font-bold text-xl">admin</span>
+                        Hoş geldin <span className="text-green-700 font-bold text-xl">{user.username}</span>
                     </h2>
                     <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-10 md:gap-10 gap-4">
                         <StatisticCard title={"Toplam Müşteri"} amount={data?.length} img={"images/user.png"} />

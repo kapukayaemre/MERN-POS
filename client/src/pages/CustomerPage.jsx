@@ -169,7 +169,14 @@ const CustomerPage = () => {
             <Header/>
             <div className="px-6">
                 <h1 className="text-4xl font-bold text-center mb-4">Müsterilerim</h1>
-                <Table dataSource={billItems} columns={columns} bordered pagination={false} scroll={{ x:1000, y:300 }} />
+                <Table
+                    dataSource={billItems}
+                    columns={columns}
+                    bordered
+                    pagination={false}
+                    scroll={{ x:1000, y:300 }}
+                    rowKey="_id"
+                />
             </div>
         </>
     );
