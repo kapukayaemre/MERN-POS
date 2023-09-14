@@ -5,7 +5,7 @@ const Add = ({isAddModalOpen, setIsAddModalOpen, categories, products, setProduc
     const [form] = Form.useForm();
     const onFinish = (values) => {
         try {
-            fetch("http://localhost:8000/api/products/add-product", {
+            fetch(process.env.REACT_APP_SERVER_URL+"/api/products/add-product", {
                 method: "POST",
                 body: JSON.stringify(values),
                 headers: {"Content-type": "application/json; charset=UTF-8"}
