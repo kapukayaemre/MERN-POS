@@ -47,25 +47,25 @@ const Header = ({setSearch}) => {
                     />
                 </div>
                 <div className="menu-links">
-                    <Link to={"/"} className="menu-link ">
+                    <Link to={"/"} className={`menu-link ${ pathname === '/' && "active" }`}>
                         <HomeOutlined className="flex justify-center md:text-2xl text-xl"/>
                         <span className="md:text-xs text-[10px]">Ana Sayfa</span>
                     </Link>
                     <Badge count={cart.cartItems.length} className="md:flex hidden">
-                        <Link to={"/cart"} className="menu-link ">
+                        <Link to={"/cart"} className={`menu-link ${ pathname === '/cart' && "active" }`}>
                             <ShoppingCartOutlined className="flex justify-center md:text-2xl text-xl"/>
                             <span className="md:text-xs text-[10px]">Sepet</span>
                         </Link>
                     </Badge>
-                    <Link to={"/bills"} className="menu-link ">
+                    <Link to={"/bills"} className={`menu-link ${ pathname === '/bills' && "active" }`}>
                         <CopyOutlined className="flex justify-center md:text-2xl text-xl"/>
                         <span className="md:text-xs text-[10px]">Faturalar</span>
                     </Link>
-                    <Link to={"/customers"} className="menu-link ">
+                    <Link to={"/customers"} className={`menu-link ${ pathname === '/customers' && "active" }`}>
                         <UserOutlined className="flex justify-center md:text-2xl text-xl"/>
                         <span className="md:text-xs text-[10px]">Müşteriler</span>
                     </Link>
-                    <Link to={"/statistic"} className="menu-link ">
+                    <Link to={"/statistic"} className={`menu-link ${ pathname === '/statistic' && "active" }`}>
                         <BarChartOutlined className="flex justify-center md:text-2xl text-xl"/>
                         <span className="md:text-xs text-[10px]">İstatistikler</span>
                     </Link>
@@ -77,7 +77,7 @@ const Header = ({setSearch}) => {
                     </div>
                 </div>
                 <Badge count={cart.cartItems.length} className="md:hidden flex">
-                    <Link to={"/cart"} className="menu-link ">
+                    <Link to={"/cart"} className={`menu-link ${ pathname === "/cart" && "active"}`}>
                         <ShoppingCartOutlined className="flex justify-center text-2xl"/>
                         <span className="md:text-xs text-[10px]">Sepet</span>
                     </Link>
