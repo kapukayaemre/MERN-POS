@@ -1,5 +1,5 @@
 import Header from "../components/header/Header";
-import {Button, Input, Space, Table} from "antd";
+import {Button, Input, Space, Spin, Table} from "antd";
 import {useEffect, useRef, useState} from "react";
 import PrintBill from "../components/bills/PrintBill";
 import {SearchOutlined} from "@ant-design/icons";
@@ -185,7 +185,7 @@ const BillPage = () => {
             title: 'İşlemler',
             dataIndex: "action",
             key: "action",
-            render: (_,record) => {
+            render: (_, record) => {
                 return <Button
                     type="link"
                     className="pl-0"
@@ -204,20 +204,24 @@ const BillPage = () => {
     return (
         <>
             <Header/>
-            <div className="px-6">
-                <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
-                <Table
-                    dataSource={billItems}
-                    columns={columns}
-                    bordered
-                    pagination={false}
-                    scroll={{
-                    x: 1000,
-                    y: 300
-                }}
-                    rowKey="_id"
-                />
-            </div>
+            <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
+            {
+                billItems ? (
+                    <div className="px-6">
+                        <Table
+                            dataSource={billItems}
+                            columns={columns}
+                            bordered
+                            pagination={false}
+                            scroll={{
+                                x: 1000,
+                                y: 300
+                            }}
+                            rowKey="_id"
+                        />
+                    </div>
+                ) : (<Spin size="large" className="absolute top-1/2 left-1/2"/>)
+            }
             <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer}/>
         </>
     );
